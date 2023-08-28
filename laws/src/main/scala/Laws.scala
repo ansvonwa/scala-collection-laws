@@ -1371,6 +1371,14 @@ gm.forall{ case (k, vs) => m(k).reverse sameAs vs }
 
 "val x0 = x; x0.`takeWhileInPlace`(p); x0 sameAs x.`takeWhile`(p)".law
 
+"x.`tapEach`(_ => ()) sameAs x".law
+
+"x.`tapEach`(_ => ()).toVector sameAs x".law
+
+"var c = 0; x.`tapEach`(_ => c += 1).toVector; c == xsize".law
+
+"val y = collection.mutable.ArrayBuffer.empty[A]; x.`tapEach`(xi => y += xi).toVector; y sameAs x".law(SEQ)
+
 "val x0 = x; val x1 = x; if (n >= 0) { x0.`trimStart`(n); x1.`dropInPlace`(n) }; x0 sameAs x1".law
 
 "val x0 = x; val x1 = x; if (n >= 0) { x0.`trimEnd`(n); x1.`dropRightInPlace`(n) }; x0 sameAs x1".law
